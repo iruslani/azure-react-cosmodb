@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import React, { useState, useEffect } from 'react';
+import logo from './logo.svg';
+import './App.css';
 
 const App = () => {
   const [hasError, setErrors] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
 
   const fetchData = async () => {
-    const res = await fetch("/api/message");
+    const res = await fetch('/api/message');
     res
       .json()
-      .then(res => setMessage(res))
+      .then(response => setMessage(response))
       .catch(err => setErrors(err));
   };
   // Similar to componentDidMount and componentDidUpdate:
@@ -24,9 +24,14 @@ const App = () => {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h1>{message}</h1>
-        <span>Has Errors: {JSON.stringify(hasError)}</span>
+        <span>
+          Has Errors:
+          {JSON.stringify(hasError)}
+        </span>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Edit
+          <code>src/App.js</code>
+          and save to reload.
         </p>
         <a
           className="App-link"
