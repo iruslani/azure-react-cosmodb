@@ -6,13 +6,13 @@ const App = () => {
   const [hasError, setErrors] = useState(false);
   const [message, setMessage] = useState("");
 
-  async function fetchData() {
+  const fetchData = async () => {
     const res = await fetch("/api/message");
     res
       .json()
       .then(res => setMessage(res))
       .catch(err => setErrors(err));
-  }
+  };
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
     // Update the document title using the browser API
