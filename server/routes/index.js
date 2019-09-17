@@ -1,8 +1,13 @@
-var express = require("express");
+var express = require('express');
 var router = express.Router();
+const dotenv = require('dotenv');
 
-router.get("/message", function(req, res, next) {
-  res.json("Welcome To Azure React CosmoDB");
+dotenv.config();
+const apiKey = process.env.SPOONACULAR_API_KEY;
+console.log(apiKey);
+
+router.get('/message', function(req, res, next) {
+  res.json('Welcome To Azure React CosmoDB');
 });
 
 module.exports = router;
