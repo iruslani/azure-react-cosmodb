@@ -1,49 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Home from './pages/home';
+import Search from './pages/search';
 
-const App = () => {
-  const [hasError, setErrors] = useState(false);
-  const [message, setMessage] = useState('');
-
-  const fetchData = async () => {
-    const res = await fetch('/api/message');
-    res
-      .json()
-      .then(response => setMessage(response))
-      .catch(err => setErrors(err));
-  };
-  // Similar to componentDidMount and componentDidUpdate:
-  useEffect(() => {
-    // Update the document title using the browser API
-    fetchData();
-  });
-
+function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>{message}</h1>
-        <span>
-          Has Errors:
-          {JSON.stringify(hasError)}
-        </span>
-        <p>
-          Edit
-          <code>src/App.js</code>
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Route exact path="/" component={Home} />
+      <Route path="/search" component={Search} />
+    </Router>
   );
-};
+}
 
 export default App;
