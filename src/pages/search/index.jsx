@@ -1,22 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, InputGroup, FormControl } from 'react-bootstrap';
-// import { useState, useEffect } from 'react';
+import requestHeaders from '../../config/requestHeaders';
 
 const Search = () => {
-  //   const [hasError, setErrors] = useState(false);
-  //   const [message, setMessage] = useState('');
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState('');
+  const [errors, setErrors] = useState({});
 
-  //   const fetchData = async () => {
-  //     const res = await fetch('/api/message');
-  //     res
-  //       .json()
-  //       .then(response => setMessage(response))
-  //       .catch(err => setErrors(err));
-  //   };
+  const search = async () => {
+    const res = await fetch('/api/search', requestHeaders(query));
+    res
+      .json()
+      .then(response => setResults(response))
+      .catch(err => setErrors(err));
+  };
 
-  //   useEffect(() => {
-  //     fetchData();
-  //   });
+  const onChangeHandler = e => {
+    setQuery(e.target.value);
+  };
 
   return (
     <div>
@@ -25,9 +26,13 @@ const Search = () => {
           placeholder="Recipient's username"
           aria-label="Recipient's username"
           aria-describedby="basic-addon2"
+          value={query}
+          onChange={onChangeHandler}
         />
         <InputGroup.Append>
-          <Button variant="outline-secondary">Button</Button>
+          <Button onClick={search} variant="outline-secondary">
+            Button
+          </Button>
         </InputGroup.Append>
       </InputGroup>
     </div>
