@@ -8,6 +8,21 @@ dotenv.config();
 const apiKey = process.env.SPOONACULAR_API_KEY;
 console.log(apiKey);
 
+router.post('/search', (req, res) => {
+  const keyword = req.body.keyword;
+  console.log(keyword);
+  const url = `https://api.spoonacular.com/recipes/search?query=${keyword}&apiKey=${apiKey}`;
+
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      res.send({ data });
+    })
+    .catch(err => {
+      res.redirect('/error');
+    });
+});
+
 router.get('/meatball', (req, res) => {
   const keyword = 'meatball';
   const url = `https://api.spoonacular.com/recipes/search?query=${keyword}&apiKey=${apiKey}`;
