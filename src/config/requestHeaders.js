@@ -1,4 +1,4 @@
-const requestHeaders = query => {
+const requestHeaders = request => {
   return {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
@@ -10,7 +10,7 @@ const requestHeaders = query => {
     },
     redirect: 'follow', // manual, *follow, error
     referrer: 'no-referrer', // no-referrer, *client
-    body: JSON.stringify({ keyword: query }) // body data type must match "Content-Type" header
+    body: JSON.stringify(request) // body data type must match "Content-Type" header
   };
 };
 
