@@ -19,7 +19,22 @@ router.post('/search', (req, res) => {
       res.send({ data });
     })
     .catch(err => {
-      res.redirect('/error');
+      res.send('An error occured from the server');
+    });
+});
+
+router.post('/recipeById', (req, res) => {
+  const id = parseInt(req.body.id, 10);
+  console.log(req.body);
+  const url = `https://api.spoonacular.com/recipes/informationBulk?ids=${id}&apiKey=${apiKey}`;
+
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      res.send({ data });
+    })
+    .catch(err => {
+      res.send(err);
     });
 });
 
